@@ -11,29 +11,33 @@ namespace Ex2
 {
     public class Commands
     {
+        #region singleton
         private string ip;
         private int port;
         private IPEndPoint ep;
         private TcpClient client;
         private static Commands instance = null;
-        private bool isConnect=false;
+        private bool isConnect = false;
+        // Private defualt constructor
+        private Commands() { }
 
-        private  Commands()
-        {
-          
-        }
+        // public command properties
         public static Commands commandInstance
         {
-            get {
-                if (instance == null) {
+            get
+            {
+                if (instance == null)
+                {
                     instance = new Commands();
                 }
                 return instance;
-                }
+            }
         }
+        #endregion
+        // Connect to client and read ip and port
         public void connect()
         {
-            if(!isConnect)
+            if (!isConnect)
             {
                 try
                 {
@@ -48,11 +52,12 @@ namespace Ex2
                 catch (System.Exception) { }
             }
         }
-
+        // The function return true if client connect and false otherwise
         public bool isConnection()
         {
             return isConnect;
         }
+        // The function stop the connection of client 
         public void disconnect()
         {
             if (isConnect)
@@ -61,8 +66,10 @@ namespace Ex2
                 isConnect = false;
             }
         }
+        // The function sent values to flight gear
         public void sendCommand(string command)
         {
+            // check if string not empty 
             if (command != "")
             {
                 try
@@ -71,6 +78,7 @@ namespace Ex2
                     using (StreamReader reader = new StreamReader(stream))
                     using (StreamWriter writer = new StreamWriter(stream))
                     {
+                        // write to flight gear
                         writer.WriteLine(command);
                     }
                 }
@@ -81,5 +89,5 @@ namespace Ex2
             }
         }
     }
-       
+
 }

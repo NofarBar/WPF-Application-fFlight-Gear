@@ -74,6 +74,7 @@ namespace Ex2.viewModel
             {
                 this.elevatorProperty = value;
                 manualModel.sentToClient(elevatorString + elevatorProperty.ToString());
+                Console.WriteLine(Elevator);
                 NotifyPropertyChanged("Elevator");
             }
         }

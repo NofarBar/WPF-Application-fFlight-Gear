@@ -14,7 +14,7 @@ namespace Ex2
         {
             action = a;
         }
-
+        //If can ececute the command
         public bool CanExecute(object parameter)
         {
             return true;
@@ -22,6 +22,7 @@ namespace Ex2
 
         public event EventHandler CanExecuteChanged;
 
+        //Execute the command
         public void Execute(object parameter)
         {
             action();

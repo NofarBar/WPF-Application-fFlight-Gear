@@ -15,12 +15,14 @@ namespace Ex2
         private object currentView;
         private object joystick;
         private object autoPilot;
+        // Constructor initalize joistick and auto pilot window
         public SwitchWindowsViewModel()
         {
             this.joystick = new Joystick();
             this.autoPilot = new AutoP();
             currentViewP = this.joystick;
         }
+        // current windows properties
         public object currentViewP
         {
             set
@@ -33,6 +35,7 @@ namespace Ex2
                 return this.currentView;
             }
         }
+        // command replace to joistick windows properties
         public ICommand GoToJoystick
         {
             get
@@ -45,6 +48,7 @@ namespace Ex2
                 return this.switchToJoystick;
             }
         }
+        // command replace to auto pilot windows properties
         public ICommand GoToAutoPilot
         {
             get

@@ -19,16 +19,20 @@ namespace Ex2
         private static Info instance = null;
         private bool isConnect = false;
         private string flightValues;
+
+        // Constructor initalize script
         private Info()
         {
             flightValuesP = "";
-            
+
         }
+        // properties for the input string from script of flight gear
         public string flightValuesP
         {
             get { return this.flightValues; }
             set { this.flightValues = value; }
         }
+
         public static Info infoInstance
         {
             get
@@ -40,39 +44,40 @@ namespace Ex2
                 return instance;
             }
         }
-        public void clientConection() {
+        // The function connect to client
+        public void clientConection()
+        {
             Console.WriteLine("Waiting for client connections...");
-            TcpClient client=null;
+            TcpClient client = null;
             try
-            { 
-
-                    client = server.AcceptTcpClient();
-                    Console.WriteLine("Client connected");
-                    isConnect = true;
+            {
+                client = server.AcceptTcpClient();
+                Console.WriteLine("Client connected");
+                isConnect = true;
                 using (NetworkStream stream = client.GetStream())
-                    using (StreamReader reader = new StreamReader(stream))
-                    using (StreamWriter writer = new StreamWriter(stream))
+                using (StreamReader reader = new StreamReader(stream))
+                using (StreamWriter writer = new StreamWriter(stream))
+                { // read from flight gear while connect
+                    while (isConnection())
                     {
-                        while (isConnection())
-                        {
-                            flightValuesP = reader.ReadLine();
-                            writer.Flush();
-                            Thread.Sleep(1000);
-
-                        }
+                        flightValuesP = reader.ReadLine();
+                        writer.Flush();
+                        Thread.Sleep(1000);
                     }
                 }
+            }
             catch (System.Exception)
             {
 
             }
-           // client.Close();
         }
+
+        // The function read the ip and port and connect
         public void connect()
         {
             if (!isConnect)
             {
-                this.ip=models.ApplicationSettingsModel.Instance.FlightServerIP;
+                this.ip = models.ApplicationSettingsModel.Instance.FlightServerIP;
                 this.port = models.ApplicationSettingsModel.Instance.FlightInfoPort;
                 Console.WriteLine("Waiting");
                 ep = new IPEndPoint(IPAddress.Parse(this.ip), port);
@@ -83,10 +88,13 @@ namespace Ex2
             clientConection();
         }
 
+        // The function return true if server connect and false otherwise
         public bool isConnection()
         {
             return isConnect;
         }
+
+        // The function stop the connection of server 
         public void disconnect()
         {
             if (isConnect)

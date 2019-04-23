@@ -10,6 +10,7 @@ namespace Ex2.models
     {
         #region Singleton
         private static ISettingsModel m_Instance = null;
+        //Return the singletone instance if null create a new one
         public static ISettingsModel Instance
         {
             get
@@ -22,28 +23,30 @@ namespace Ex2.models
             }
         }
         #endregion
+        //Property for the server IP
         public string FlightServerIP
         {
             get { return Setting.Default.FlightServerIP; }
             set { Setting.Default.FlightServerIP = value; }
         }
+        //Property for the command port 
         public int FlightCommandPort
         {
             get { return Setting.Default.FlightCommandPort; }
             set { Setting.Default.FlightCommandPort = value; }
         }
-
+        //Property for the server port
         public int FlightInfoPort
         {
             get { return Setting.Default.FlightInfoPort; }
             set { Setting.Default.FlightInfoPort = value; }
         }
-
+        //Save the setting 
         public void SaveSettings()
         {
             Setting.Default.Save();
         }
-
+        //Reloade Setting
         public void ReloadSettings()
         {
             Setting.Default.Reload();

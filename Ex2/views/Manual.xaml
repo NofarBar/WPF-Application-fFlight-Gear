@@ -31,7 +31,7 @@
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Left" Width="750" Margin="-60,0,10,-120">
-            <TextBlock DockPanel.Dock="Bottom" FontWeight="Bold" Text="{Binding Elevator,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat={}{0:0.00}}" HorizontalAlignment="Center" Height="32" Margin="532,105,172,-150" TextWrapping="Wrap"  VerticalAlignment="Top" Width="46"/>
+            <TextBlock DockPanel.Dock="Bottom" FontWeight="Bold" Text="{Binding Path=Elevator}" HorizontalAlignment="Center" Height="32" Margin="532,105,172,-150" TextWrapping="Wrap"  VerticalAlignment="Top" Width="46"/>
             <TextBlock DockPanel.Dock="Bottom" FontWeight="Bold" Text="{Binding Aileron,StringFormat={}{0:0.00}}" HorizontalAlignment="Center" Height="32" Margin="140,45,564,-190" TextWrapping="Wrap"  VerticalAlignment="Top" Width="46"/>
             <TextBlock Height="20" Width="60" FontStyle="Italic" FontWeight="Bold" FontSize="15" Margin="60,45,640,10"  TextWrapping="Wrap" Text="aileron" VerticalAlignment="Top"/>
             <TextBlock Height="20" Width="80" FontStyle="Italic" FontWeight="Bold" FontSize="15" Margin="461,30,209,0"  TextWrapping="Wrap" Text="elevator" VerticalAlignment="Top"/>
