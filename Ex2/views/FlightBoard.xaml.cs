@@ -25,6 +25,7 @@ namespace Ex2
     {
         ObservableDataSource<Point> planeLocations = null;
         private viewModel.FlightBoardViewModel viewModel;
+        // constructor crearw new view model and add to list to notify
         public FlightBoard()
         {
             InitializeComponent();
@@ -43,15 +44,16 @@ namespace Ex2
             plotter.AddLineGraph(planeLocations, 2, "Route");
         }
 
+        // if property of lat or lon changed, draw to screen the new point
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
             {
 
-                int x,y;
+                int x, y;
                 Console.WriteLine(viewModel.Lat);
                 Console.WriteLine(viewModel.Lat);
-                Point p1 = new Point(viewModel.Lat, viewModel.Lon);           
+                Point p1 = new Point(viewModel.Lat, viewModel.Lon);
                 planeLocations.AppendAsync(Dispatcher, p1);
             }
         }
@@ -59,4 +61,3 @@ namespace Ex2
     }
 
 }
-

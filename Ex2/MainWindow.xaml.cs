@@ -20,8 +20,6 @@ namespace Ex2
     /// </summary>
     public partial class MainWindow : Window
     {
-        Joystick j;
-
         public MainWindow()
         {
             InitializeComponent();

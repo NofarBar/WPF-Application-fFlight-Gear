@@ -13,9 +13,10 @@ namespace Ex2.models
         {
             this.command = Commands.commandInstance;
         }
-
+        //The function send the command to the plane
         public void sentToClient(string input)
         {
+            //Connect to the clieant and sent the command
             this.command.connect();
             this.command.sendCommand(input);
             this.command.disconnect();

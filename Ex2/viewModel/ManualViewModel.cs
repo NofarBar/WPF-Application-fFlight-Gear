@@ -22,7 +22,7 @@ namespace Ex2.viewModel
         {
             this.manualModel = new models.ManualModel();
         }
-
+        //Rudder property
         public double Rudder
         {
             get
@@ -32,10 +32,11 @@ namespace Ex2.viewModel
             set
             {
                 this.rudderProperty = value;
+                //Send command to client
                 manualModel.sentToClient(rudderString + rudderProperty.ToString());
             }
         }
-
+        //Throttle property
         public double Throttle
         {
             get
@@ -46,10 +47,11 @@ namespace Ex2.viewModel
             {
 
                 this.throttleProperty = value;
+                //Send command to client
                 manualModel.sentToClient(throttleString + throttleProperty.ToString());
             }
         }
-
+        //Ailron property
         public double Aileron
         {
             get
@@ -59,11 +61,12 @@ namespace Ex2.viewModel
             set
             {
                 this.aileronProperty = value;
+                //Send command to client
                 manualModel.sentToClient(aileronString + aileronProperty.ToString());
                 NotifyPropertyChanged("Aileron");
             }
         }
-
+        //Elevator property
         public double Elevator
         {
             get
@@ -73,6 +76,7 @@ namespace Ex2.viewModel
             set
             {
                 this.elevatorProperty = value;
+                //Send command to client
                 manualModel.sentToClient(elevatorString + elevatorProperty.ToString());
                 Console.WriteLine(Elevator);
                 NotifyPropertyChanged("Elevator");

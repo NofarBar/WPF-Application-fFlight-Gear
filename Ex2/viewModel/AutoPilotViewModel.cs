@@ -19,11 +19,13 @@ namespace Ex2.viewModel
             apModel = new AutoPilotModel();
             
         }
+        //Script Property
         public string scriptProperty
         {
             set
             {
                 script = value;
+                //If the script is enmpty change the color to white else pink
                 if ((script == null) || (script == ""))
                 {
                     brush = new SolidColorBrush(Colors.White);
@@ -39,6 +41,7 @@ namespace Ex2.viewModel
                 return script;
             }
         }
+        //apModel Property
         public Brush brush
         {
             set
@@ -51,6 +54,7 @@ namespace Ex2.viewModel
                 return apModel.color;
             }
         }
+        //Ok Command property
         public ICommand okCommandP
         {
             get
@@ -59,6 +63,7 @@ namespace Ex2.viewModel
                 {
                     okCommand = new CommandHandler(() =>
                     {
+                        //Send all the command to the client
                         if((script!=null) && (script != ""))
                         {
                             string[] setCommands = script.Split('\n');
@@ -72,7 +77,7 @@ namespace Ex2.viewModel
                 return okCommand;
             }
         }
-
+        //Cancel command property and notify
         public ICommand cancelCommandP
         {
             get

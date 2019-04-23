@@ -15,17 +15,17 @@ namespace Ex2.models
         {
             action = a;
         }
-
+        //Can ececute the command
         public bool CanExecute(object parameter)
         {
             return true;
         }
 
-        public event EventHandler CanExecuteChanged;
-
+        //Execute the command with parameter
         public void Execute(object parameter)
         {
             action();
+            //Close the window
             ((Window)parameter).Close();
         }
     }

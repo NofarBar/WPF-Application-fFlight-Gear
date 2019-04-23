@@ -20,12 +20,14 @@ namespace Ex2.viewModel
             this.flightModle = new models.FlightBoardModel();
 
         }
+        //Connect Command property
         public ICommand ConnectP
         {
             get
             {
                 if (connectB == null)
                 {
+                    //If empty Create a new Command
                     connectB = new CommandHandler(() =>
                     {
                         Thread connectThread = new Thread(new ThreadStart(() =>
@@ -35,6 +37,7 @@ namespace Ex2.viewModel
                         connectThread.Start();
                     });
                 }
+                //Update an and lat in a new thread
                 Thread UpdatePoint = new Thread(new ThreadStart(() =>
                 {
                     while (!flightModle.serverP.isConnection())
@@ -49,28 +52,29 @@ namespace Ex2.viewModel
                             NotifyPropertyChanged("Lat");
                         }
                     }
-
                 }));
                 UpdatePoint.Start();
                 return connectB;
             }
         }
-
+        //Lon property
         public double Lon
         {
             get { return flightModle.longitude; }
         }
-
+        //Lat property
         public double Lat
         {
             get { return flightModle.latitude; }
         }
+        //Setting command property
         public ICommand SettingP
         {
             get
             {
                 if (settingB == null)
                 {
+                    //Creae a nre command handler
                     settingB = new CommandHandler(() =>
                     {
                         SettingView setting = new SettingView();
@@ -82,12 +86,14 @@ namespace Ex2.viewModel
                 return settingB;
             }
         }
+        //Dissconnect command property
         public ICommand DisConnectP
         {
             get
             {
                 if (disConnectB == null)
                 {
+                    //Create a new with parameter command
                     disConnectB = new models.RelayCommand(() =>
                     {
                         flightModle.serverP.disconnect();
