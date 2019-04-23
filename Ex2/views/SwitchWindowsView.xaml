@@ -10,8 +10,8 @@
         <DataTemplate DataType="{x:Type local:AutoP}">
             <local:AutoP/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:Joystick}">
-            <local:Joystick/>
+        <DataTemplate DataType="{x:Type local:Manual}">
+            <local:Manual/>
         </DataTemplate>
     </UserControl.Resources>
  

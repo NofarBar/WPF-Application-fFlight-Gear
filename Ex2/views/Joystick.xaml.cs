@@ -38,10 +38,6 @@ namespace Ex2
         public static readonly DependencyProperty ElevatorStepProperty =
             DependencyProperty.Register("ElevatorStep", typeof(double), typeof(Joystick), new PropertyMetadata(1.0));
 
-        /* Unstable - needs work */
-        ///// <summary>Indicates whether the joystick knob resets its place after being released</summary>
-        //public static readonly DependencyProperty ResetKnobAfterReleaseProperty =
-        //    DependencyProperty.Register(nameof(ResetKnobAfterRelease), typeof(bool), typeof(VirtualJoystick), new PropertyMetadata(true));
 
         /// <summary>Current Aileron in degrees from 0 to 360</summary>
         public double Aileron
@@ -73,8 +69,7 @@ namespace Ex2
                 SetValue(AileronStepProperty, Math.Round(value));
             }
         }
-
-        
+   
         /// <summary>How often should be raised StickMove event in Elevator units</summary>
         public double ElevatorStep
         {
@@ -85,13 +80,6 @@ namespace Ex2
                 SetValue(ElevatorStepProperty, value);
             }
         }
-
-        /// <summary>Indicates whether the joystick knob resets its place after being released</summary>
-        //public bool ResetKnobAfterRelease
-        //{
-        //    get { return Convert.ToBoolean(GetValue(ResetKnobAfterReleaseProperty)); }
-        //    set { SetValue(ResetKnobAfterReleaseProperty, value); }
-        //}
 
         /// <summary>Delegate holding data for joystick state change</summary>
         /// <param name="sender">The object that fired the event</param>
@@ -129,7 +117,6 @@ namespace Ex2
 
         private void Knob_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("down");
             _startPos = e.GetPosition(Base);
             _prevAileron = _prevElevator = 0;
             canvasWidth = Base.ActualWidth - KnobBase.ActualWidth;
@@ -137,14 +124,10 @@ namespace Ex2
             Captured?.Invoke(this);
             Knob.CaptureMouse();
             centerKnob.Stop();
-
         }
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
-            ///!!!!!!!!!!!!!!!!!
-            /// YOU MUST CHANGE THE FUNCTION!!!!
-            ///!!!!!!!!!!!!!!
             if (!Knob.IsMouseCaptured) return;
             Point newPos = e.GetPosition(Base);
 
@@ -153,45 +136,27 @@ namespace Ex2
             double distance = Math.Round(Math.Sqrt(deltaPos.X * deltaPos.X + deltaPos.Y * deltaPos.Y));
             if (distance >= canvasWidth / 2 || distance >= canvasHeight / 2)
                 return;
-            Aileron = -deltaPos.Y;
-            Elevator = deltaPos.X;
-            
-
+            Aileron = (-deltaPos.Y)/124;
+            Elevator = deltaPos.X/124;
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
-
             if (Moved == null ||
                 (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
                 return;
-
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });
             _prevAileron = Aileron;
             _prevElevator = Elevator;
-
         }
-
         private void Knob_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Console.WriteLine("left");
-
             Knob.ReleaseMouseCapture();
             centerKnob.Begin();
         }
-
-        private void Manual_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+    
         private void centerKnob_Completed(object sender, EventArgs e)
         {
             Aileron = Elevator = _prevAileron = _prevElevator = 0;
             Released?.Invoke(this);
         }
-
-
-
-
-
     }
 }

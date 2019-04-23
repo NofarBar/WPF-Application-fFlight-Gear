@@ -32,7 +32,6 @@ namespace Ex2
             viewModel = new viewModel.FlightBoardViewModel();
             viewModel.PropertyChanged += Vm_PropertyChanged;
             this.DataContext = viewModel;
-
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -40,19 +39,13 @@ namespace Ex2
             planeLocations = new ObservableDataSource<Point>();
             // Set identity mapping of point in collection to point on plot
             planeLocations.SetXYMapping(p => p);
-
             plotter.AddLineGraph(planeLocations, 2, "Route");
         }
-
         // if property of lat or lon changed, draw to screen the new point
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
             {
-
-                int x, y;
-                Console.WriteLine(viewModel.Lat);
-                Console.WriteLine(viewModel.Lat);
                 Point p1 = new Point(viewModel.Lat, viewModel.Lon);
                 planeLocations.AppendAsync(Dispatcher, p1);
             }

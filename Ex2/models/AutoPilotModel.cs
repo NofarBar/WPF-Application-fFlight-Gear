@@ -27,7 +27,6 @@ namespace Ex2
             for (int i = 0; i < len; i++)
             {
                 client.sendCommand(commandsArray[i]);
-                Console.WriteLine(commandsArray[i]);
                 Thread.Sleep(2000);
             }
             color= new SolidColorBrush(Colors.White);

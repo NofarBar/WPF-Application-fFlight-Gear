@@ -34,7 +34,6 @@ namespace Ex2.viewModel
                 {
                     brush = new SolidColorBrush(Colors.LightPink);
                 }
-                Console.WriteLine(script);
             }
             get
             {

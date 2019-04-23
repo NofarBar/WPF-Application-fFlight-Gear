@@ -28,5 +28,7 @@ namespace Ex2.models
             //Close the window
             ((Window)parameter).Close();
         }
+
+        public event EventHandler CanExecuteChanged;
     }
 }

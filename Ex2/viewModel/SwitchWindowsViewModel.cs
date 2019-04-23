@@ -18,7 +18,7 @@ namespace Ex2
         // Constructor initalize joistick and auto pilot window
         public SwitchWindowsViewModel()
         {
-            this.joystick = new Joystick();
+            this.joystick = new Manual();
             this.autoPilot = new AutoP();
             currentViewP = this.joystick;
         }
